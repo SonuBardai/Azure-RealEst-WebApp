@@ -1,0 +1,16 @@
+{% extends "market/base.html" %}
+{% load static %}
+{% block body %}
+
+<div class="h-screen w-full flex flex-col justify-center items-center text-gray-800">
+    <h1 class="text-3xl font-extrabold">About Page</h1>
+    <p class="py-5 px-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ipsam voluptas beatae pariatur obcaecati cumque tempora totam laborum dignissimos inventore adipisci ab nostrum vero reprehenderit blanditiis, aliquam dolorem quisquam culpa incidunt aperiam nam tempore quae officiis? Nemo dolorum consequuntur odio nostrum inventore impedit, ut quasi?</p>
+    <p class="py-5 px-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur veritatis error obcaecati maxime in quia voluptate explicabo tempora, assumenda accusantium quas consequuntur, iure cum asperiores, veniam eligendi mollitia libero. Ex illum nulla ratione soluta molestiae. Repellat cupiditate eos doloribus! Eligendi, autem cum. Ullam, fuga vero officia magni laboriosam odio minima excepturi quos ea asperiores! Nobis reprehenderit architecto labore animi fugiat?</p>
+</div>
+
+<script>
+    let about = document.getElementById('nav_about')
+    about.classList = ["bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"]
+</script>
+
+{% endblock body %}
