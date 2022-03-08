@@ -1,6 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Properties
 
 def home(request):
     context = {
@@ -9,8 +8,11 @@ def home(request):
     return render(request, 'market/home.html', context)
 
 def dashboard(request):
+    properties = Properties.objects.all()
+
     context = {
-        'login' : False
+        'login' : False, 
+        'properties' : properties
     }
     return render(request, 'market/dashboard.html', context)
 
