@@ -19,5 +19,3 @@ class Profile(models.Model):
             img.thumbnail(size)
             img.save(self.image.path)
         # Grabbing the saved profile picture and compressing it
-
-        # JPEG_20170925_075938_684367262_XpBHvk6
