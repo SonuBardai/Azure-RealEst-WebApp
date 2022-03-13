@@ -4,6 +4,9 @@ from django.shortcuts import redirect
 from .forms import UserRegistration, UserUpdate, ProfileUpdate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.views.generic import CreateView
+from users.models import Contact
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def register(request):
     if request.method == 'POST':
@@ -42,3 +45,12 @@ def profile(request):
         'p_form' : p_form
     }
     return render(request, 'users/profile.html', context)
+
+class CreateContact(LoginRequiredMixin, CreateView):
+    model = Contact
+    fields = ['title', 'desc']
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

@@ -1,3 +1,4 @@
+from turtle import ondrag
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
@@ -19,3 +20,11 @@ class Profile(models.Model):
             img.thumbnail(size)
             img.save(self.image.path)
         # Grabbing the saved profile picture and compressing it
+
+class Contact(models.Model):
+    title = models.CharField(max_length=100, primary_key=True)
+    desc = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Query by {self.author.username}'
