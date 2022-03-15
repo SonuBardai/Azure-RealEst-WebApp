@@ -12,6 +12,7 @@ class Properties(models.Model):
     desc = models.TextField()
     slug = models.SlugField(blank=True, max_length=50)
     
+    location = models.TextField()
     listing_date = models.DateTimeField(default = timezone.now)
     
     size = models.IntegerField(
@@ -44,6 +45,7 @@ class Properties(models.Model):
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        # Creating a Slug for the Property
 
         super().save(*args, **kwargs)
 

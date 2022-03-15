@@ -4,6 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
+import os
 
 def home(request):
     context = {
@@ -28,7 +29,7 @@ def about(request):
 
 class NewProperty(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Properties
-    fields = ['title', 'desc', 'size', 'bedrooms', 'price', 'image1', 'image2', 'image3']
+    fields = ['title', 'desc', 'location', 'size', 'bedrooms', 'price', 'image1', 'image2', 'image3']
     success_message = 'Property Listed'
 
     def form_valid(self, form):
@@ -37,10 +38,11 @@ class NewProperty(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class UpdateProperty(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Properties
-    fields = ['title', 'desc', 'size', 'bedrooms', 'price', 'image1', 'image2', 'image3']
+    fields = ['title', 'desc', 'location', 'size', 'bedrooms', 'price', 'image1', 'image2', 'image3']
     success_message = 'Listing Updated'
 
     def test_func(self):
+        print("Images ARE: ", self.images)
         property = self.get_object()
         return True if self.request.user == property.listed_by else False
 
@@ -55,6 +57,15 @@ class DeleteProperty(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         return True if self.request.user == property.listed_by else False
     
     def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        # Deleting images associated with the Delisted Property
+        os.remove(instance.image1.path)
+        if instance.image2:
+            os.remove(instance.image2.path)
+        if instance.image3:
+            os.remove(instance.image3.path)
+        
+        # Displaying successfully deleted message
         messages.success(self.request, self.success_message)
         return super(DeleteProperty, self).delete(request, *args, **kwargs)
 

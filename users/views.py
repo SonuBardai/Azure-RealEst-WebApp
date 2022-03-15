@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.shortcuts import redirect
+from market.models import Properties
 from .forms import UserRegistration, UserUpdate, ProfileUpdate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from users.models import Contact
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 def register(request):
     if request.method == 'POST':
@@ -15,7 +17,7 @@ def register(request):
             register_form.save()
             username = register_form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}')
-            redirect('market-home')
+            return redirect('login')
     else:
         register_form = UserRegistration()
     context = {
@@ -54,3 +56,11 @@ class CreateContact(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class UserListings(LoginRequiredMixin, ListView):
+    model = Properties
+    
+    def get_queryset(self):
+        username = self.kwargs.get('username')
+        user = get_object_or_404(User, username=username)
+        return Properties.objects.filter(listed_by = user).order_by('-listing_date')

@@ -87,12 +87,19 @@
                 <hr class="mt-5 border-gray-500">
                 <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                     <div class="flex flex-col">
+                        <div class="flex flex-row gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#579353"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z"/></svg>
+                            <div>{{object.location}}</div>
+                          </div>
                         <div class="mb-3">Bedrooms: {{object.bedrooms}}</div>
                         <div class="mb-3">Carpet Area: {{object.size}} sq. Feet</div>
                         <div>Listed on: {{object.listing_date|date:"d F, Y"}}</div>
                     </div>
                 </div>
                 <hr class="mt-1 border-gray-500">
+                <h3 class="text-gray-900 text-2xl title-font font-medium mb-1">Owner Details</h3>
+                <div class="mt-2">Name: {{object.listed_by.username}}</div>
+                <div class="mt-2">Email: {{object.listed_by.email}}</div>
             </div>
             <div class="flex flex-row gap-10">
                 <span class="ml-9 title-font font-medium text-2xl text-gray-900">${{object.price}}</span>
@@ -102,12 +109,12 @@
                     <a href="{% url 'property-delete' object.slug %}" class="flex ml-auto cursor-pointer text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Delist</a>
                 </div>
                 {% else %}
-                <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Bid</button>
-                <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                <!-- <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Bid</button> -->
+                <!-- <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                   <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                   </svg>
-                </button>
+                </button> -->
                 {% endif %}
             </div>
         </div>
