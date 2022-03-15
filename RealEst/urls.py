@@ -24,7 +24,7 @@ from users.views import CreateContact, UserListings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('market.urls')),
-    path('/<str:username>', UserListings.as_view(), name='user-listings'),
+    path('<str:username>', UserListings.as_view(), name='user-listings'),
     path('register/', user_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', user_views.logout_user, name='logout'),
