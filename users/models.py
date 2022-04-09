@@ -14,7 +14,6 @@ class Profile(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        print(self.image)
         self.image_name = self.image
 
     def save(self, *args, **kwargs):
