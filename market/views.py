@@ -1,3 +1,4 @@
+from itertools import chain
 from django.db import models
 from django.shortcuts import redirect, render
 from .models import Properties
@@ -6,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 import os
-from django.conf import settings
+import json
 
 
 def home(request):
@@ -17,17 +18,26 @@ def home(request):
 
 
 def dashboard(request):
-
-    if request.method == 'POST' and request.POST['search']:
-        query = request.POST['search']
-        properties = Properties.objects.filter(
-            models.Q(title__icontains=query) |
-            models.Q(desc__icontains=query) |
-            models.Q(location__icontains=query)
-        )
+    if request.method == 'POST':
+        if not request.POST:
+            queries = json.loads(request.body).split(" ")
+        else:
+            queries = request.POST['search'].split(" ")
+        print("QUERIES: ", queries)
+        properties = None
+        for query in queries:
+            if not query:
+                continue
+            properties = list(chain(Properties.objects.filter(
+                models.Q(title__icontains=query) |
+                models.Q(tags__icontains=query) |
+                models.Q(desc__icontains=query) |
+                models.Q(location__icontains=query)
+            )))
+        # print(properties)
         context = {
             'properties': properties,
-            'filter': query
+            'filters': queries
         }
         return render(request, 'market/dashboard.html', context)
 
@@ -106,6 +116,8 @@ class DeleteProperty(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
 class DetailProperty(DetailView):
     model = Properties
 
-
-def handler404(request, *args, **kwargs):
-    return redirect('login')
+    def get_context_data(self, *args, **kwargs):
+        context = super(DetailProperty, self).get_context_data(*args, **kwargs)
+        property = Properties.objects.filter(slug=self.kwargs['slug']).first()
+        context['tags'] = json.loads(property.tags)
+        return context

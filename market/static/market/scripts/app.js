@@ -8,5 +8,3 @@ profile_picture.addEventListener("mouseenter", ()=>{
 profile_dropdown.addEventListener('mouseleave', ()=>{
     profile_dropdown.style.display = 'none';
 })
-
-console.log('Connected');

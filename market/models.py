@@ -8,14 +8,21 @@ from PIL import Image
 import os
 from django.conf import settings
 
+from generateVision.vision import getTags, getTagsByImage
+
+import json
+
+
 class Properties(models.Model):
     title = models.CharField(max_length=100)
     desc = models.TextField()
     slug = models.SlugField(blank=True, max_length=50)
-    
+
+    tags = models.TextField(blank=True)
+
     location = models.TextField()
-    listing_date = models.DateTimeField(default = timezone.now)
-    
+    listing_date = models.DateTimeField(default=timezone.now)
+
     size = models.IntegerField(
         validators=[
             MinValueValidator(100)
@@ -34,7 +41,7 @@ class Properties(models.Model):
             MinValueValidator(1)
         ]
     )
-    
+
     listed_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     image1 = models.ImageField(upload_to="property_pics")
@@ -45,7 +52,7 @@ class Properties(models.Model):
 
     def __str__(self):
         return f"<{self.title}, {self.listed_by}, {self.price}>"
-    
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         # Creating a Slug for the Property
@@ -53,15 +60,26 @@ class Properties(models.Model):
         split_name = self.image1.name.split('/')
         if len(split_name) == 2:
             new_name = 'thumbnail-' + split_name[1]
-        else: 
+        else:
             new_name = 'thumbnail-' + split_name[0]
         self.thumbnail = '/media/property_pics/'+new_name
         # Sets the name of the Thumbnail being set
 
+        if not self.tags:
+            tags = getTagsByImage(self.image1)
+            if (not tags) and self.image2:
+                tags = getTagsByImage(self.image2)
+            if (not tags) and self.image3:
+                tags = getTagsByImage(self.image3)
+
+            stringTags = json.dumps(tags)
+            self.tags = stringTags
+            # Generating Tags
+
         super().save(*args, **kwargs)
-        
+
         path = os.path.join(settings.MEDIA_ROOT, 'property_pics', new_name)
-        
+
         img = Image.open(self.image1.path)
         if img.height > 200 or img.width > 200:
             size = (600, 400)
@@ -69,6 +87,5 @@ class Properties(models.Model):
             img.save(path)
         # Creating the thumbnail from the original image1 file
 
-    
     def get_absolute_url(self):
         return reverse('market-dashboard')

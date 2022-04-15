@@ -1,5 +1,7 @@
 {% extends 'market/base.html' %}
 {% block body %}
+
+<!-- PREVIOUS  -->
 <section class="text-gray-600 body-font overflow-hidden">
     <div class="container px-5 py-10 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -24,15 +26,31 @@
                 <h2 class="text-sm title-font text-gray-500 tracking-widest">Listed by {{ object.listed_by.username }}
                 </h2>
                 <h1 class="text-gray-900 text-3xl title-font font-medium mb-2 mt-2">{{ object.title }}</h1>
-                
+
                 <p class="leading-relaxed">{{ object.desc }}</p>
+                {% if tags %}
+                <div class="mx-4 my-4">
+                    <div class="mx-2 my-2">Tags: </div>
+                    {% for tag in tags %}
+                    <span
+                        class="mx-2 my-2 inline-flex items-center justify-center px-3 py-2 text-lg font-bold leading-none text-gray-100 bg-gray-600 rounded-full">
+                        {{ tag }}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <hr class="mt-5 border-gray-500">
                 <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                     <div class="flex flex-col">
                         <div class="flex flex-row gap-2 mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#579353"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                                fill="#579353">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z" />
+                            </svg>
                             <div>{{object.location}}</div>
-                          </div>
+                        </div>
                         <div class="mb-3">Bedrooms: {{object.bedrooms}}</div>
                         <div class="mb-3">Carpet Area: {{object.size}} sq. Feet</div>
                         <div>Listed on: {{object.listing_date|date:"d F, Y"}}</div>
@@ -47,8 +65,10 @@
                 <span class="ml-9 title-font font-medium text-2xl text-gray-900">${{object.price}}</span>
                 {% if request.user == object.listed_by %}
                 <div class="flex flex-row gap-5">
-                    <a href="{% url 'property-update' object.slug %}" class="flex ml-auto cursor-pointer text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Update</a>
-                    <a href="{% url 'property-delete' object.slug %}" class="flex ml-auto cursor-pointer text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Delist</a>
+                    <a href="{% url 'property-update' object.slug %}"
+                        class="flex ml-auto cursor-pointer text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Update</a>
+                    <a href="{% url 'property-delete' object.slug %}"
+                        class="flex ml-auto cursor-pointer text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Delist</a>
                 </div>
                 {% else %}
                 <!-- <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Bid</button> -->
@@ -63,4 +83,7 @@
     </div>
     </div>
 </section>
+
+
+
 {% endblock body %}
