@@ -18,12 +18,9 @@ def home(request):
 
 
 def dashboard(request):
-    if request.method == 'POST':
-        if not request.POST:
-            queries = json.loads(request.body).split(" ")
-        else:
-            queries = request.POST['search'].split(" ")
-        print("QUERIES: ", queries)
+    if request.method == 'POST' and request.POST['search']:
+        queries = request.POST['search'].split(" ")
+        
         properties = None
         for query in queries:
             if not query:
@@ -34,7 +31,6 @@ def dashboard(request):
                 models.Q(desc__icontains=query) |
                 models.Q(location__icontains=query)
             )))
-        # print(properties)
         context = {
             'properties': properties,
             'filters': queries

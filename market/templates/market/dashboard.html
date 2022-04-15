@@ -25,18 +25,11 @@
       </span>
       {% for filter in filters %}
       <span
-        class="mx-2 inline-flex items-center justify-center pl-2 py-1 text-sm font-bold leading-none text-gray-100 bg-gray-600 rounded-full">
+        class="mx-2 inline-flex items-center justify-center px-2 py-1 text-sm font-bold leading-none text-gray-100 bg-gray-600 rounded-full">
         {{ filter }}
-        <button type="button" onclick="sendFilters(this)" data-filter="{{ filter }}" class="filter">
-          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="15" viewBox="0 0 30 30"
-            style=" fill:#ffffff;">
-            <path
-              d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z">
-            </path>
-          </svg>
-        </button>
       </span>
       {% endfor %}
+      <button type="submit" class="filter bg-red-700 text-white rounded-lg px-3">Clear Filters</button>
       {% endif %}
     </form>
     <div class="pt-2 relative mx-auto mb-2 text-gray-600">
@@ -111,46 +104,46 @@
   let dashboard = document.getElementById('nav_dashboard')
   dashboard.classList = ["bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"]
 
-  function getCSRFToken(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
+  // function getCSRFToken(name) {
+  //   let cookieValue = null;
+  //   if (document.cookie && document.cookie !== '') {
+  //     const cookies = document.cookie.split(';');
+  //     for (let i = 0; i < cookies.length; i++) {
+  //       const cookie = cookies[i].trim();
+  //       // Does this cookie string begin with the name we want?
+  //       if (cookie.substring(0, name.length + 1) === (name + '=')) {
+  //         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+  //         break;
+  //       }
+  //     }
+  //   }
+  //   return cookieValue;
+  // }
 
-  const sendFilters = (button) => {
-    filter = button.dataset.filter
-    let buttons = document.getElementsByClassName('filter')
-    restFilters = []
+  // const sendFilters = (button) => {
+  //   filter = button.dataset.filter
+  //   let buttons = document.getElementsByClassName('filter')
+  //   restFilters = []
 
-    Array.prototype.forEach.call(buttons, (button) => {
-      if (button.dataset.filter !== filter) {
-        restFilters.push(button.dataset.filter)
-      }
-    })
+  //   Array.prototype.forEach.call(buttons, (button) => {
+  //     if (button.dataset.filter !== filter) {
+  //       restFilters.push(button.dataset.filter)
+  //     }
+  //   })
 
-    const csrftoken = getCSRFToken('csrftoken');
+  //   const csrftoken = getCSRFToken('csrftoken');
 
-    fetch('/dashboard/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrftoken
-      },
-      body: JSON.stringify(restFilters)
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
-  }
+  //   fetch('/dashboard/', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'X-CSRFToken': csrftoken
+  //     },
+  //     body: JSON.stringify(restFilters)
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => console.log(data))
+  // }
 
 </script>
 
