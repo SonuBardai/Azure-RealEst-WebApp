@@ -81,10 +81,16 @@ WSGI_APPLICATION = 'RealEst.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# Using Azure PostGres Server
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'realestDB',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST_URL'),
+        'PORT': config('DB_PORT'),
+        'OPTIONS': {'sslmode':'require'}
     }
 }
 
