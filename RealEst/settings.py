@@ -140,7 +140,19 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
 CRISPY_TEMPLATE_PACK = 'tailwind'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'market-home'
+
+# Azure Storage
+DEFAULT_FILE_STORAGE = 'backend.custom_azure.AzureMediaStorage'
+STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
+
+STATIC_LOCATION = "static"
+MEDIA_LOCATION = "media"
+
+AZURE_ACCOUNT_NAME = config('STORAGE_ACC_NAME')
+AZURE_CUSTOM_DOMAIN = config('STORAGE_ACC_DOMAIN')
+STATIC_URL = config('STORAGE_ACC_STATIC_URL')
+MEDIA_URL = config('STORAGE_ACC_MEDIA_URL')
