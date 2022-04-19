@@ -1,7 +1,7 @@
 # RealEst - An Azure-based Real Estate Marketplace
-- This is a project created for the Microsoft's Future Ready Talent Intership Program. 
+- This is a project created for Microsoft's Future Ready Talent Internship Program. 
 
-- RealEst is a real-estate market-place project that uses Azure technologies to provide a medium for real estate sellers and buyers to exchange property listings and real estate information quickly and effectively. 
+- RealEst is a real-estate marketplace project that uses Azure technologies to provide a medium for real estate sellers and buyers to exchange property listings and real estate information quickly and effectively. 
 
 ### Problem Statement: 
 - The problem with the current state of the online real estate market is that it is frustrating for property buyers to find the perfect house that they desire, and for property sellers to give a concise and comprehensive description of their house that would make their listing visible to the appropriate customers. 
@@ -33,10 +33,15 @@
     - API_KEY 
     - ENDPOINT
 
-- The Project is now set up, and can be hosted onto an Azure Web App. 
+- The Project is now set up and can be hosted onto an Azure Web App. 
 
 ## Technology Stack Used: 
-    - HTML, CSS, JS
-    - Python Django, Azure Computer Vision
-    - Azure PostGres Database Server, Azure Blob Storage Account
-    - Azure Web App for Hosting
+- HTML, CSS, JS
+- Python Django, Azure Computer Vision
+- Azure Postgres Database Server, Azure Blob Storage Account
+- Azure Web App for Hosting
+
+## How it works:
+- Everytime a seller lists a property, the images associated with the property are sent to the Azure Computer Vision resource in a REST API call. 
+- The API returns a set of tags that describe the images, which are then stored along with the property listing. 
+- These tags assist the buyers in filtering out properties and finding property listings with specific features. 
