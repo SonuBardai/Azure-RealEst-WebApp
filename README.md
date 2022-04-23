@@ -4,7 +4,7 @@
 - RealEst is a real-estate marketplace project that uses Azure technologies to provide a medium for real estate sellers and buyers to exchange property listings and real estate information quickly and effectively. 
 
 ## Azure Services Used: 
-- ### Azure Web App: ]
+- ### Azure Web App: 
     - This Azure service is used to host the web application to the Internet. 
     - <a href="https://realest.azurewebsites.net/">Link</a>
 - ### Azure Postgres Database Server: 
