@@ -38,8 +38,9 @@
   - These tags assist the buyers in filtering out properties and finding property listings with specific features.
 
 ## About the Project: 
+
 ### Screenshots: 
-- Refer the "/SCREENSHOTS/" folder in the repository. 
+- Inside the "/SCREENSHOTS/" folder in the repository. 
 
 ### Problem Statement:
 - The problem with the current state of the online real estate market is that it is frustrating for property buyers to find the perfect house that they desire, and for property sellers to give a concise and comprehensive description of their house that would make their listing visible to the appropriate customers.
