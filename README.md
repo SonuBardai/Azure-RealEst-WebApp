@@ -6,7 +6,8 @@
 ## Azure Services Used: 
 - ### Azure Web App: 
     - This Azure service is used to host the web application to the Internet. 
-    - <a href="https://realest.azurewebsites.net/">Link</a>
+    - <a href="https://realest.azurewebsites.net/">Hosted Project URL</a>
+    - <a href="https://www.youtube.com/watch?v=1VdZL36kXBw&ab_channel=SonuBardai">Video Demo of the Project</a>
 - ### Azure Postgres Database Server: 
     - This Azure service is used to store the user data and the data related to the properties that are listed on the application dashboard. 
 - ### Azure Blob Storage Account: 
@@ -16,6 +17,10 @@
     - Everytime a seller lists a property, the images associated with the property are sent to the Azure Computer Vision resource in a REST API call. 
     - The API returns a set of tags that describe the images, which are then stored along with the property listing. 
     - These tags assist the buyers in filtering out properties and finding property listings with specific features. 
+
+## About the Project: 
+### Screenshots: 
+
 
 ### Problem Statement: 
 - The problem with the current state of the online real estate market is that it is frustrating for property buyers to find the perfect house that they desire, and for property sellers to give a concise and comprehensive description of their house that would make their listing visible to the appropriate customers. 
@@ -43,7 +48,7 @@
 
 - The Project is now set up and can be hosted onto an Azure Web App. 
 
-## Technology Stack Used: 
+## Technologies Stack Used: 
 - HTML, CSS, JS
 - Python Django, Azure Computer Vision
 - Azure Postgres Database Server, Azure Blob Storage Account
