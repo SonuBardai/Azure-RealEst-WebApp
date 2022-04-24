@@ -6,8 +6,8 @@
 ## Azure Services Used: 
 - ### Azure Web App: 
     - This Azure service is used to host the web application to the Internet. 
-    - <a href="https://realest.azurewebsites.net/">Hosted Project URL</a>
-    - <a href="https://www.youtube.com/watch?v=1VdZL36kXBw&ab_channel=SonuBardai">Video Demo of the Project</a>
+    - <a href="https://realest.azurewebsites.net/" target="_blank">Hosted Project URL</a>
+    - <a href="https://www.youtube.com/watch?v=1VdZL36kXBw&ab_channel=SonuBardai" target="_blank">Video Demo of the Project</a>
 - ### Azure Postgres Database Server: 
     - This Azure service is used to store the user data and the data related to the properties that are listed on the application dashboard. 
 - ### Azure Blob Storage Account: 
