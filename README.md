@@ -37,16 +37,20 @@
   - The API returns a set of tags that describe the images, which are then stored along with the property listing.
   - These tags assist the buyers in filtering out properties and finding property listings with specific features.
 
-### Problem Statement:
+## About the Project: 
+### Screenshots: 
+![Alt text](/SCREENSHOTS/Screenshot(1).png?raw=true)
+![Alt text](/SCREENSHOTS/Screenshot(2).png?raw=true)
+![Alt text](/SCREENSHOTS/Screenshot(3).png?raw=true)
+![Alt text](/SCREENSHOTS/Screenshot(4).png?raw=true)
 
+### Problem Statement:
 - The problem with the current state of the online real estate market is that it is frustrating for property buyers to find the perfect house that they desire, and for property sellers to give a concise and comprehensive description of their house that would make their listing visible to the appropriate customers.
 
 ### Project Description:
-
 - RealEst attempts to solve this issue by making use of Azure's Computer Vision technology to help real estate sellers automatically create appropriate tags and filters for their listings, and for buyers to find houses with the exact characteristics that they desire.
 
 ## Setup:
-
 - pip install -r requirements.txt
 - Create a .env file and include the following environment variables inside it:
   - SECRET_KEY
@@ -66,8 +70,6 @@
   - ENDPOINT
 
 - The Project is now set up and can be hosted onto an Azure Web App.
-
-## Technology Stack Used:
 
 ## Technologies Stack Used: 
 - HTML, CSS, JS
